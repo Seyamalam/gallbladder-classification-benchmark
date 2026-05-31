@@ -119,6 +119,22 @@ Overall files:
 - `model_comparison_metrics.png`
 - `model_metric_ranks.png`
 - `accuracy_size_throughput.png`
+- `classification_metrics_comparison.png`
+- `efficiency_metrics_comparison.png`
+- `history_all_models.csv`
+- `history_dashboard_all_models.png`
+- `history_train_loss_comparison.png`
+- `history_val_loss_comparison.png`
+- `history_train_accuracy_comparison.png`
+- `history_val_accuracy_comparison.png`
+- `history_train_macro_f1_comparison.png`
+- `history_val_macro_f1_comparison.png`
+- `history_epoch_time_comparison.png`
+- `history_final_epoch_metrics.png`
+- `per_class_metrics_long.csv`
+- `per_class_precision_heatmap.png`
+- `per_class_recall_heatmap.png`
+- `per_class_f1_heatmap.png`
 
 Per-model files:
 

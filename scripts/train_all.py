@@ -592,6 +592,151 @@ def save_comparison_plots(out_dir: Path, metrics_frame: pd.DataFrame):
         fig.savefig(out_dir / "accuracy_size_throughput.png", dpi=180)
         plt.close(fig)
 
+    metric_groups = {
+        "classification_metrics_comparison.png": [
+            "accuracy",
+            "balanced_accuracy",
+            "macro_f1",
+            "weighted_f1",
+            "macro_roc_auc_ovr",
+            "macro_average_precision",
+        ],
+        "efficiency_metrics_comparison.png": [
+            "train_seconds",
+            "inference_images_per_second",
+            "inference_latency_ms_per_image_mean",
+            "total_params",
+            "model_state_mb",
+        ],
+    }
+    for filename, columns in metric_groups.items():
+        group_cols = [c for c in columns if c in metrics_frame.columns]
+        if not group_cols:
+            continue
+        fig, axes = plt.subplots(len(group_cols), 1, figsize=(12, 3.2 * len(group_cols)))
+        if len(group_cols) == 1:
+            axes = [axes]
+        for ax, column in zip(axes, group_cols):
+            ordered = metrics_frame.sort_values(column, ascending=column in {"train_seconds", "inference_latency_ms_per_image_mean", "total_params", "model_state_mb"})
+            sns.barplot(data=ordered, x=column, y="model", ax=ax, color="#4C78A8")
+            ax.set_title(column.replace("_", " ").title())
+            ax.set_xlabel(column)
+            ax.set_ylabel("")
+        fig.tight_layout()
+        fig.savefig(out_dir / filename, dpi=180)
+        plt.close(fig)
+
+    per_class_rows = []
+    for _, row in metrics_frame.iterrows():
+        for metric_name in ["precision", "recall", "f1", "support"]:
+            suffix = f"__{metric_name}"
+            for column in metrics_frame.columns:
+                if column.endswith(suffix):
+                    per_class_rows.append(
+                        {
+                            "model": row["model"],
+                            "class": column[: -len(suffix)],
+                            "metric": metric_name,
+                            "value": row[column],
+                        }
+                    )
+    per_class_frame = pd.DataFrame(per_class_rows)
+    if not per_class_frame.empty:
+        per_class_frame.to_csv(out_dir / "per_class_metrics_long.csv", index=False)
+        for metric_name in ["precision", "recall", "f1"]:
+            metric_frame = per_class_frame[per_class_frame.metric == metric_name]
+            if metric_frame.empty:
+                continue
+            pivot = metric_frame.pivot(index="model", columns="class", values="value")
+            fig, ax = plt.subplots(figsize=(max(10, len(pivot.columns) * 1.2), max(5, len(pivot) * 0.45)))
+            sns.heatmap(pivot, annot=True, fmt=".2f", cmap="mako", vmin=0, vmax=1, ax=ax)
+            ax.set_title(f"Per-Class {metric_name.title()} by Model")
+            ax.set_xlabel("Class")
+            ax.set_ylabel("Model")
+            fig.tight_layout()
+            fig.savefig(out_dir / f"per_class_{metric_name}_heatmap.png", dpi=180)
+            plt.close(fig)
+
+
+def save_history_comparison_plots(out_dir: Path, model_names: list[str]):
+    history_frames = []
+    for model_name in model_names:
+        history_path = out_dir / model_name / "history.csv"
+        if not history_path.exists():
+            continue
+        history = pd.read_csv(history_path)
+        history["model"] = model_name
+        history_frames.append(history)
+    if not history_frames:
+        return
+
+    history_frame = pd.concat(history_frames, ignore_index=True)
+    history_frame.to_csv(out_dir / "history_all_models.csv", index=False)
+    sns.set_theme(style="whitegrid")
+
+    curve_specs = [
+        ("train_loss", "Training Loss", "history_train_loss_comparison.png"),
+        ("val_loss", "Validation Loss", "history_val_loss_comparison.png"),
+        ("train_accuracy", "Training Accuracy", "history_train_accuracy_comparison.png"),
+        ("val_accuracy", "Validation Accuracy", "history_val_accuracy_comparison.png"),
+        ("train_macro_f1", "Training Macro F1", "history_train_macro_f1_comparison.png"),
+        ("val_macro_f1", "Validation Macro F1", "history_val_macro_f1_comparison.png"),
+        ("epoch_seconds", "Epoch Time", "history_epoch_time_comparison.png"),
+    ]
+    for column, title, filename in curve_specs:
+        if column not in history_frame.columns:
+            continue
+        fig, ax = plt.subplots(figsize=(12, 7))
+        sns.lineplot(data=history_frame, x="epoch", y=column, hue="model", marker="o", ax=ax)
+        ax.set_title(title)
+        ax.set_xlabel("Epoch")
+        ax.set_ylabel(column.replace("_", " ").title())
+        ax.legend(fontsize=8)
+        fig.tight_layout()
+        fig.savefig(out_dir / filename, dpi=180)
+        plt.close(fig)
+
+    fig, axes = plt.subplots(2, 3, figsize=(18, 10), sharex=True)
+    dashboard_specs = [
+        ("train_loss", "Train Loss"),
+        ("val_loss", "Val Loss"),
+        ("train_accuracy", "Train Accuracy"),
+        ("val_accuracy", "Val Accuracy"),
+        ("train_macro_f1", "Train Macro F1"),
+        ("val_macro_f1", "Val Macro F1"),
+    ]
+    for ax, (column, title) in zip(axes.ravel(), dashboard_specs):
+        if column not in history_frame.columns:
+            ax.axis("off")
+            continue
+        sns.lineplot(data=history_frame, x="epoch", y=column, hue="model", ax=ax)
+        ax.set_title(title)
+        ax.set_xlabel("Epoch")
+        ax.set_ylabel("")
+        legend = ax.get_legend()
+        if legend is not None:
+            legend.remove()
+    handles, labels = axes[0, 0].get_legend_handles_labels()
+    if labels:
+        fig.legend(handles, labels, loc="lower center", ncol=min(5, len(labels)), fontsize=8)
+    fig.tight_layout(rect=(0, 0.06, 1, 1))
+    fig.savefig(out_dir / "history_dashboard_all_models.png", dpi=180)
+    plt.close(fig)
+
+    final_history = history_frame.sort_values("epoch").groupby("model", as_index=False).tail(1)
+    final_cols = [c for c in ["train_loss", "val_loss", "train_accuracy", "val_accuracy", "train_macro_f1", "val_macro_f1"] if c in final_history.columns]
+    if final_cols:
+        final_long = final_history.melt(id_vars="model", value_vars=final_cols, var_name="metric", value_name="value")
+        fig, ax = plt.subplots(figsize=(14, 7))
+        sns.barplot(data=final_long, x="model", y="value", hue="metric", ax=ax)
+        ax.tick_params(axis="x", labelrotation=35)
+        for label in ax.get_xticklabels():
+            label.set_horizontalalignment("right")
+        ax.set_title("Final Epoch History Metrics")
+        fig.tight_layout()
+        fig.savefig(out_dir / "history_final_epoch_metrics.png", dpi=180)
+        plt.close(fig)
+
 
 def train_one_model(model_name, loaders, classes, config: RunConfig, device, out_dir: Path):
     model_dir = out_dir / model_name
@@ -804,6 +949,7 @@ def main():
 
     metrics_frame = pd.DataFrame(all_metrics)
     save_comparison_plots(out_dir, metrics_frame)
+    save_history_comparison_plots(out_dir, args.models)
     print(f"\nDone. Outputs: {out_dir.resolve()}")
 
 
