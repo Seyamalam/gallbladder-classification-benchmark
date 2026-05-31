@@ -1,0 +1,19 @@
+[project]
+name = "gallbladder-classification"
+version = "0.1.0"
+description = "Train lightweight image classifiers on the gallbladder disease dataset."
+requires-python = ">=3.11,<3.13"
+dependencies = [
+  "matplotlib>=3.9",
+  "numpy>=1.26",
+  "pandas>=2.2",
+  "pillow>=10.4",
+  "scikit-learn>=1.5",
+  "seaborn>=0.13",
+  "torch>=2.5",
+  "torchvision>=0.20",
+  "tqdm>=4.66",
+]
+
+[tool.uv]
+package = false
