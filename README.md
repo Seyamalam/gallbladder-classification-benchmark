@@ -1,12 +1,48 @@
 # Gallbladder Disease Image Classification Benchmark
 
-This repository benchmarks lightweight convolutional neural network classifiers for gallbladder disease image classification on Apple Silicon using PyTorch, uv, and the MPS backend.
+This repository benchmarks 10 lightweight PyTorch image classifiers for gallbladder disease classification on Apple Silicon using the MPS backend. The aim is not just to train models, but to compare accuracy, robustness, training cost, inference speed, parameter count, and model-size tradeoffs under one shared protocol.
 
-The goal is to compare practical medical-image classifiers under the same training, validation, testing, and inference protocol. The project intentionally avoids very large models such as VGG and focuses on efficient architectures that are realistic to train on a MacBook Pro with unified memory.
+The benchmark was run in multiple sessions and then compiled into one final report. The compiler selects the completed result for each model from `outputs/runs`, verifies that all 10 models have `history.csv` and `metrics.json`, and writes a consolidated report to `reports/final_benchmark`.
 
-## What This Creates
+## Final Summary
 
-The benchmark trains 10 models on 224x224 RGB images:
+- Best test macro F1: `shufflenet_v2_x1_0` at `0.8500`
+- Best test accuracy: `efficientnet_b1` at `0.7727`
+- Best ROC-AUC: `densenet121` at `0.9609`
+- Fastest inference: `mobilenet_v3_small` at `4627.18` images/sec
+- Smallest model: `squeezenet1_1` with `727,113` parameters
+- Best practical speed/accuracy balance: `shufflenet_v2_x1_0` and `mobilenet_v3_small`
+
+## Dataset
+
+The local dataset used for this benchmark contained 9 classes and 13,872 images.
+
+```text
+train: 9,710
+validation: 2,081
+test: 2,081
+```
+
+Class folders are expected under:
+
+```text
+Gallblader Diseases Dataset/
+  1Gallstones/
+  2Abdomen and retroperitoneum/
+  3cholecystitis/
+  4Membranous and gangrenous cholecystitis/
+  5Perforation/
+  6Polyps and cholesterol crystals/
+  7Adenomyomatosis/
+  8Carcinoma/
+  9Various causes of gallbladder wall thickening/
+```
+
+The dataset itself is not committed to this repository.
+
+## Models
+
+The benchmark intentionally avoids very large models such as VGG and compares efficient architectures:
 
 - `mobilenet_v3_small`
 - `mobilenet_v3_large`
@@ -19,142 +55,130 @@ The benchmark trains 10 models on 224x224 RGB images:
 - `squeezenet1_1`
 - `shufflenet_v2_x1_0`
 
-For every model, the pipeline records training behavior, validation performance, final test-set classification quality, parameter count, model size estimate, training time, and inference latency/throughput.
-
-## Dataset Layout
-
-The script expects an ImageFolder-like dataset where each top-level folder is a class. Nested image folders are supported.
-
-```text
-Gallblader Diseases Dataset/
-  1Gallstones/
-  2Abdomen and retroperitoneum/
-  3cholecystitis/
-  ...
-```
-
-The local dataset used during setup contained 9 classes and 13,872 images. The dataset itself is not committed to this public repository.
-
 ## Methodology
 
-The benchmark uses the same protocol for every model:
+All models use the same setup:
 
 - Image size: 224x224
 - Input mode: RGB
 - Split: stratified train/validation/test
-- Default split sizes: 70% train, 15% validation, 15% test
-- Epochs: 50 by default
+- Epochs: 50
 - Optimizer: AdamW
 - Learning rate: `3e-4`
 - Weight decay: `1e-4`
 - Scheduler: cosine annealing
-- Pretraining: torchvision ImageNet weights by default
-- Class imbalance handling: weighted random sampler on the training split
-- Best checkpoint selection: highest validation macro F1
-- Final evaluation: best checkpoint on held-out test split
+- Pretraining: torchvision ImageNet weights
+- Class imbalance handling: weighted random sampler
+- Checkpoint selection: best validation macro F1
+- Final evaluation: held-out test split
 - Inference benchmark: warmup batches followed by measured test batches
+- Device: Apple Silicon MPS via `torch.device("mps")`
 
-Apple Silicon acceleration follows the official PyTorch MPS pattern: check `torch.backends.mps.is_available()`, select `torch.device("mps")`, move models and tensors to MPS, synchronize for timing, and report `torch.mps` memory statistics.
+The run prints PyTorch/MPS availability, MPS memory, parameter counts, tqdm progress, train/validation metrics, epoch time, and inference timing.
 
-## Metrics Collected
+## Classification Results
 
-Per model:
+Sorted by test macro F1.
 
-- Total parameters
-- Trainable parameters
-- Non-trainable parameters
-- Parameter memory estimate
-- Buffer memory estimate
-- Model state memory estimate
-- Training time in seconds
-- Per-epoch train loss, accuracy, macro F1
-- Per-epoch validation loss, accuracy, macro F1
-- Per-epoch learning rate
-- Per-epoch wall time
-- MPS memory stats when available
-- Test accuracy
-- Test balanced accuracy
-- Test macro F1
-- Test weighted F1
-- Matthews correlation coefficient
-- Top-2 accuracy
-- Top-3 accuracy
-- Macro ROC-AUC one-vs-rest
-- Weighted ROC-AUC one-vs-rest
-- Macro average precision
-- Per-class precision, recall, F1, and support
-- Inference images/second
-- Mean, p50, p95, and standard deviation latency per image
+| model | run | accuracy | balanced_accuracy | macro_f1 | macro_roc_auc_ovr | macro_average_precision |
+| --- | --- | --- | --- | --- | --- | --- |
+| shufflenet_v2_x1_0 | 20260601_114302 | 0.7713 | 0.8644 | 0.8500 | 0.9592 | 0.8556 |
+| efficientnet_b1 | 20260601_004804 | 0.7727 | 0.8663 | 0.8492 | 0.9596 | 0.8556 |
+| densenet121 | 20260601_114302 | 0.7713 | 0.8649 | 0.8490 | 0.9609 | 0.8585 |
+| resnet18 | 20260601_114302 | 0.7693 | 0.8631 | 0.8487 | 0.9572 | 0.8521 |
+| efficientnet_b0 | 20260601_004804 | 0.7689 | 0.8626 | 0.8481 | 0.9602 | 0.8561 |
+| mobilenet_v3_small | 20260601_004804 | 0.7655 | 0.8593 | 0.8455 | 0.9585 | 0.8538 |
+| squeezenet1_1 | 20260601_114302 | 0.7636 | 0.8552 | 0.8445 | 0.9590 | 0.8554 |
+| densenet169 | 20260601_114302 | 0.7650 | 0.8593 | 0.8439 | 0.9597 | 0.8557 |
+| resnet34 | 20260601_114302 | 0.7669 | 0.8620 | 0.8436 | 0.9606 | 0.8574 |
+| mobilenet_v3_large | 20260601_004804 | 0.7612 | 0.8546 | 0.8417 | 0.9561 | 0.8498 |
 
-Overall benchmark:
+![Classification metrics comparison](reports/final_benchmark/classification_metrics_comparison.png)
 
-- Dataset manifest CSVs
-- Stratified split CSVs
-- Class counts
-- Model parameter comparison CSV
-- Model metric comparison CSV
-- Benchmark summary CSV
-- Comparison plots and rank heatmaps
+## Efficiency Results
 
-## Outputs
+Sorted by inference throughput.
 
-Each run writes to:
+| model | total_params | model_state_mb | train_seconds | inference_images_per_second | inference_latency_ms_per_image_mean |
+| --- | --- | --- | --- | --- | --- |
+| mobilenet_v3_small | 1,527,081 | 5.8718 | 11.8 min | 4627.1806 | 0.2161 |
+| squeezenet1_1 | 727,113 | 2.7737 | 10.6 min | 3253.4315 | 0.3074 |
+| shufflenet_v2_x1_0 | 1,262,829 | 4.8795 | 14.5 min | 3156.3711 | 0.3168 |
+| mobilenet_v3_large | 4,213,561 | 16.1669 | 23.5 min | 1666.0737 | 0.6002 |
+| resnet18 | 11,181,129 | 42.6894 | 24.1 min | 1523.4071 | 0.6564 |
+| efficientnet_b0 | 4,019,077 | 15.4922 | 42.0 min | 1009.8917 | 0.9902 |
+| resnet34 | 21,289,289 | 81.2774 | 39.0 min | 891.7389 | 1.1214 |
+| efficientnet_b1 | 6,524,713 | 25.1270 | 58.7 min | 738.4027 | 1.3543 |
+| densenet121 | 6,963,081 | 26.8821 | 72.6 min | 423.4609 | 2.3615 |
+| densenet169 | 12,499,465 | 48.2872 | 85.5 min | 385.0517 | 2.5971 |
 
-```text
-outputs/runs/<timestamp>/
-```
+![Efficiency metrics comparison](reports/final_benchmark/efficiency_metrics_comparison.png)
 
-Overall files:
+## Learning History
 
-- `config.json`
-- `class_to_idx.json`
-- `all_files.csv`
-- `train_files.csv`
-- `val_files.csv`
-- `test_files.csv`
-- `class_counts.csv`
-- `metrics_summary.csv`
-- `benchmark_summary.csv`
-- `model_parameters.csv`
-- `model_comparison_metrics.png`
-- `model_metric_ranks.png`
-- `accuracy_size_throughput.png`
-- `classification_metrics_comparison.png`
-- `efficiency_metrics_comparison.png`
-- `history_all_models.csv`
-- `history_dashboard_all_models.png`
-- `history_train_loss_comparison.png`
-- `history_val_loss_comparison.png`
-- `history_train_accuracy_comparison.png`
-- `history_val_accuracy_comparison.png`
-- `history_train_macro_f1_comparison.png`
-- `history_val_macro_f1_comparison.png`
-- `history_epoch_time_comparison.png`
-- `history_final_epoch_metrics.png`
-- `per_class_metrics_long.csv`
-- `per_class_precision_heatmap.png`
-- `per_class_recall_heatmap.png`
-- `per_class_f1_heatmap.png`
+The final epoch values are close across models, which suggests the benchmark is separating models more by efficiency and stability than by raw accuracy. The top validation macro F1 values cluster around `0.83` to `0.84`, while test macro F1 clusters around `0.84` to `0.85`.
 
-Per-model files:
+| model | epoch | train_loss | val_loss | train_accuracy | val_accuracy | train_macro_f1 | val_macro_f1 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| resnet18 | 50 | 0.2593 | 0.4310 | 0.8665 | 0.7559 | 0.8667 | 0.8401 |
+| shufflenet_v2_x1_0 | 50 | 0.2674 | 0.4177 | 0.8625 | 0.7573 | 0.8614 | 0.8400 |
+| densenet169 | 50 | 0.2561 | 0.4346 | 0.8686 | 0.7564 | 0.8674 | 0.8397 |
+| densenet121 | 50 | 0.2538 | 0.4367 | 0.8728 | 0.7530 | 0.8724 | 0.8373 |
+| mobilenet_v3_small | 50 | 0.2535 | 0.4306 | 0.8713 | 0.7511 | 0.8683 | 0.8365 |
+| mobilenet_v3_large | 50 | 0.2495 | 0.4335 | 0.8730 | 0.7487 | 0.8705 | 0.8344 |
+| resnet34 | 50 | 0.2576 | 0.4316 | 0.8700 | 0.7482 | 0.8649 | 0.8343 |
+| efficientnet_b1 | 50 | 0.2573 | 0.4548 | 0.8718 | 0.7472 | 0.8665 | 0.8329 |
+| efficientnet_b0 | 50 | 0.2551 | 0.4422 | 0.8709 | 0.7458 | 0.8667 | 0.8325 |
+| squeezenet1_1 | 50 | 0.2673 | 0.4349 | 0.8607 | 0.7424 | 0.8616 | 0.8302 |
 
-- `best.pt`
-- `history.csv`
-- `metrics.json`
-- `classification_report.csv`
-- `test_predictions.csv`
-- `test_probabilities.csv`
-- `inference_benchmark_batches.csv`
-- `learning_curves.png`
-- `confusion_matrix.png`
-- `confusion_matrix_normalized.png`
-- `roc_curves.png`
-- `precision_recall_curves.png`
+![History dashboard](reports/final_benchmark/history_dashboard_all_models.png)
 
-## Full Benchmark
+![Validation macro F1 comparison](reports/final_benchmark/history_val_macro_f1_comparison.png)
+
+![Validation loss comparison](reports/final_benchmark/history_val_loss_comparison.png)
+
+## Tradeoff Analysis
+
+The best model by pure macro F1 is `shufflenet_v2_x1_0`, but the margin over `efficientnet_b1`, `densenet121`, and `resnet18` is very small. The difference between the top model and the fifth model is under `0.002` macro F1, so efficiency matters a lot here.
+
+`mobilenet_v3_small` is the strongest deployment-style model. It is not the top scorer, but it is very close in macro F1 while being the fastest inference model by a wide margin. `squeezenet1_1` is the smallest model and trains quickly, but it gives up a little classification quality.
+
+DenseNet models perform well by ROC-AUC and average precision, but they are the slowest in this benchmark. `densenet169` is especially expensive here without improving macro F1 over the lighter alternatives.
+
+![Accuracy size throughput](reports/final_benchmark/accuracy_size_throughput.png)
+
+![Accuracy train time latency](reports/final_benchmark/accuracy_train_time_latency.png)
+
+![Benchmark rank heatmap](reports/final_benchmark/benchmark_rank_heatmap.png)
+
+![Benchmark normalized heatmap](reports/final_benchmark/benchmark_normalized_heatmap.png)
+
+## Per-Class Behavior
+
+The per-class heatmaps show that the models are broadly similar, but not identical, in their error profile. These plots are useful when picking a model for a class-sensitive workflow, because the highest overall macro F1 model is not always the best model for every individual class.
+
+![Per-class precision heatmap](reports/final_benchmark/per_class_precision_heatmap.png)
+
+![Per-class recall heatmap](reports/final_benchmark/per_class_recall_heatmap.png)
+
+![Per-class F1 heatmap](reports/final_benchmark/per_class_f1_heatmap.png)
+
+## Discussion
+
+The results show a tight accuracy band. All 10 models reached roughly comparable test performance, with macro F1 between `0.8417` and `0.8500`. That means model choice should not be based only on the top-line score. In this dataset, the practical question is which model gives enough accuracy for the least cost.
+
+For a balanced benchmark winner, `shufflenet_v2_x1_0` is compelling: it achieved the best macro F1 while staying small and fast. For maximum throughput, `mobilenet_v3_small` is the clear pick. It is over 10x faster than DenseNet models in measured inference throughput while losing only about `0.0045` macro F1 compared with the top score.
+
+`efficientnet_b1` produced the highest test accuracy and second-best macro F1, but it trained much longer and inferred slower than the MobileNet/ShuffleNet models. `densenet121` had the best ROC-AUC and average precision, suggesting strong ranking behavior, but its training and inference costs are high.
+
+The validation curves suggest the models converge early and then refine slowly. The training macro F1 is consistently higher than validation macro F1, indicating some generalization gap. Additional work should evaluate stronger augmentation, patient-level leakage prevention if patient identifiers exist, calibration, external validation, and repeated seeds.
+
+## Reproduce Training
+
+Full benchmark:
 
 ```bash
-uv run python scripts/train_all.py --device mps --epochs 50 --image-size 224 --batch-size 32 --num-workers 4
+uv run python scripts/train_all.py --device mps --epochs 50 --image-size 224 --batch-size 32 --num-workers 8
 ```
 
 If memory pressure is high:
@@ -163,18 +187,45 @@ If memory pressure is high:
 uv run python scripts/train_all.py --device mps --epochs 50 --image-size 224 --batch-size 16 --num-workers 4
 ```
 
-If a PyTorch operation lacks MPS support on your installed version:
+If an operation lacks MPS support:
 
 ```bash
-PYTORCH_ENABLE_MPS_FALLBACK=1 uv run python scripts/train_all.py --device mps --epochs 50 --image-size 224 --batch-size 32 --num-workers 4
+PYTORCH_ENABLE_MPS_FALLBACK=1 uv run python scripts/train_all.py --device mps --epochs 50 --image-size 224 --batch-size 32 --num-workers 8
 ```
 
-## Smoke Test
+Compile the final report from completed runs:
 
 ```bash
-uv run python scripts/train_all.py --device mps --epochs 1 --models mobilenet_v3_small --limit-per-class 4 --batch-size 8 --num-workers 0 --val-size 0.25 --test-size 0.25 --benchmark-batches 2 --output-dir outputs/smoke
+uv run python scripts/compile_final_report.py
 ```
 
-## Notes
+## Report Artifacts
 
-This benchmark is intended for reproducible model comparison, not clinical deployment. Any medical use would require dataset documentation, leakage checks, external validation, calibration analysis, and review by qualified clinical experts.
+Final report files are in:
+
+```text
+reports/final_benchmark/
+```
+
+Important files:
+
+- `benchmark_summary.csv`
+- `model_parameters.csv`
+- `history_all_models.csv`
+- `all_completed_run_candidates.csv`
+- `summary.json`
+- `classification_metrics_comparison.png`
+- `efficiency_metrics_comparison.png`
+- `history_dashboard_all_models.png`
+- `accuracy_size_throughput.png`
+- `accuracy_train_time_latency.png`
+- `benchmark_rank_heatmap.png`
+- `benchmark_normalized_heatmap.png`
+- `per_class_metrics_long.csv`
+- `per_class_precision_heatmap.png`
+- `per_class_recall_heatmap.png`
+- `per_class_f1_heatmap.png`
+
+## Medical Note
+
+This benchmark is for research and engineering comparison only. It is not a clinical diagnostic system. Medical deployment would require careful dataset documentation, leakage checks, patient-level splitting, calibration, external validation, and review by qualified clinical experts.

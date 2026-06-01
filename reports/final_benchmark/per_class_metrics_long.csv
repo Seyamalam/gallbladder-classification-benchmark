@@ -1,0 +1,361 @@
+model,class,metric,value
+mobilenet_v3_small,1Gallstones,precision,1.0
+mobilenet_v3_small,2Abdomen and retroperitoneum,precision,1.0
+mobilenet_v3_small,3cholecystitis,precision,1.0
+mobilenet_v3_small,4Membranous and gangrenous cholecystitis,precision,1.0
+mobilenet_v3_small,5Perforation,precision,0.99375
+mobilenet_v3_small,6Polyps and cholesterol crystals,precision,1.0
+mobilenet_v3_small,7Adenomyomatosis,precision,0.8959276018099548
+mobilenet_v3_small,8Carcinoma,precision,0.32286995515695066
+mobilenet_v3_small,9Various causes of gallbladder wall thickening,precision,0.9261744966442953
+mobilenet_v3_small,1Gallstones,recall,1.0
+mobilenet_v3_small,2Abdomen and retroperitoneum,recall,1.0
+mobilenet_v3_small,3cholecystitis,recall,0.9941860465116279
+mobilenet_v3_small,4Membranous and gangrenous cholecystitis,recall,1.0
+mobilenet_v3_small,5Perforation,recall,1.0
+mobilenet_v3_small,6Polyps and cholesterol crystals,recall,1.0
+mobilenet_v3_small,7Adenomyomatosis,recall,0.4794188861985472
+mobilenet_v3_small,8Carcinoma,recall,0.9037656903765691
+mobilenet_v3_small,9Various causes of gallbladder wall thickening,recall,0.35658914728682173
+mobilenet_v3_small,1Gallstones,f1,1.0
+mobilenet_v3_small,2Abdomen and retroperitoneum,f1,1.0
+mobilenet_v3_small,3cholecystitis,f1,0.9970845481049563
+mobilenet_v3_small,4Membranous and gangrenous cholecystitis,f1,1.0
+mobilenet_v3_small,5Perforation,f1,0.9968652037617555
+mobilenet_v3_small,6Polyps and cholesterol crystals,f1,1.0
+mobilenet_v3_small,7Adenomyomatosis,f1,0.6246056782334385
+mobilenet_v3_small,8Carcinoma,f1,0.47577092511013214
+mobilenet_v3_small,9Various causes of gallbladder wall thickening,f1,0.5149253731343284
+mobilenet_v3_small,1Gallstones,support,199.0
+mobilenet_v3_small,2Abdomen and retroperitoneum,support,175.0
+mobilenet_v3_small,3cholecystitis,support,172.0
+mobilenet_v3_small,4Membranous and gangrenous cholecystitis,support,184.0
+mobilenet_v3_small,5Perforation,support,159.0
+mobilenet_v3_small,6Polyps and cholesterol crystals,support,153.0
+mobilenet_v3_small,7Adenomyomatosis,support,413.0
+mobilenet_v3_small,8Carcinoma,support,239.0
+mobilenet_v3_small,9Various causes of gallbladder wall thickening,support,387.0
+mobilenet_v3_large,1Gallstones,precision,1.0
+mobilenet_v3_large,2Abdomen and retroperitoneum,precision,1.0
+mobilenet_v3_large,3cholecystitis,precision,1.0
+mobilenet_v3_large,4Membranous and gangrenous cholecystitis,precision,1.0
+mobilenet_v3_large,5Perforation,precision,0.9754601226993865
+mobilenet_v3_large,6Polyps and cholesterol crystals,precision,1.0
+mobilenet_v3_large,7Adenomyomatosis,precision,0.8873873873873874
+mobilenet_v3_large,8Carcinoma,precision,0.31722054380664655
+mobilenet_v3_large,9Various causes of gallbladder wall thickening,precision,0.896774193548387
+mobilenet_v3_large,1Gallstones,recall,1.0
+mobilenet_v3_large,2Abdomen and retroperitoneum,recall,1.0
+mobilenet_v3_large,3cholecystitis,recall,0.9767441860465116
+mobilenet_v3_large,4Membranous and gangrenous cholecystitis,recall,1.0
+mobilenet_v3_large,5Perforation,recall,1.0
+mobilenet_v3_large,6Polyps and cholesterol crystals,recall,1.0
+mobilenet_v3_large,7Adenomyomatosis,recall,0.47699757869249393
+mobilenet_v3_large,8Carcinoma,recall,0.8786610878661087
+mobilenet_v3_large,9Various causes of gallbladder wall thickening,recall,0.35917312661498707
+mobilenet_v3_large,1Gallstones,f1,1.0
+mobilenet_v3_large,2Abdomen and retroperitoneum,f1,1.0
+mobilenet_v3_large,3cholecystitis,f1,0.9882352941176471
+mobilenet_v3_large,4Membranous and gangrenous cholecystitis,f1,1.0
+mobilenet_v3_large,5Perforation,f1,0.9875776397515528
+mobilenet_v3_large,6Polyps and cholesterol crystals,f1,1.0
+mobilenet_v3_large,7Adenomyomatosis,f1,0.6204724409448819
+mobilenet_v3_large,8Carcinoma,f1,0.46614872364039955
+mobilenet_v3_large,9Various causes of gallbladder wall thickening,f1,0.5129151291512916
+mobilenet_v3_large,1Gallstones,support,199.0
+mobilenet_v3_large,2Abdomen and retroperitoneum,support,175.0
+mobilenet_v3_large,3cholecystitis,support,172.0
+mobilenet_v3_large,4Membranous and gangrenous cholecystitis,support,184.0
+mobilenet_v3_large,5Perforation,support,159.0
+mobilenet_v3_large,6Polyps and cholesterol crystals,support,153.0
+mobilenet_v3_large,7Adenomyomatosis,support,413.0
+mobilenet_v3_large,8Carcinoma,support,239.0
+mobilenet_v3_large,9Various causes of gallbladder wall thickening,support,387.0
+efficientnet_b0,1Gallstones,precision,1.0
+efficientnet_b0,2Abdomen and retroperitoneum,precision,1.0
+efficientnet_b0,3cholecystitis,precision,1.0
+efficientnet_b0,4Membranous and gangrenous cholecystitis,precision,1.0
+efficientnet_b0,5Perforation,precision,1.0
+efficientnet_b0,6Polyps and cholesterol crystals,precision,1.0
+efficientnet_b0,7Adenomyomatosis,precision,0.9609756097560975
+efficientnet_b0,8Carcinoma,precision,0.3288690476190476
+efficientnet_b0,9Various causes of gallbladder wall thickening,precision,0.8641975308641975
+efficientnet_b0,1Gallstones,recall,1.0
+efficientnet_b0,2Abdomen and retroperitoneum,recall,1.0
+efficientnet_b0,3cholecystitis,recall,1.0
+efficientnet_b0,4Membranous and gangrenous cholecystitis,recall,1.0
+efficientnet_b0,5Perforation,recall,1.0
+efficientnet_b0,6Polyps and cholesterol crystals,recall,1.0
+efficientnet_b0,7Adenomyomatosis,recall,0.47699757869249393
+efficientnet_b0,8Carcinoma,recall,0.9246861924686193
+efficientnet_b0,9Various causes of gallbladder wall thickening,recall,0.36175710594315247
+efficientnet_b0,1Gallstones,f1,1.0
+efficientnet_b0,2Abdomen and retroperitoneum,f1,1.0
+efficientnet_b0,3cholecystitis,f1,1.0
+efficientnet_b0,4Membranous and gangrenous cholecystitis,f1,1.0
+efficientnet_b0,5Perforation,f1,1.0
+efficientnet_b0,6Polyps and cholesterol crystals,f1,1.0
+efficientnet_b0,7Adenomyomatosis,f1,0.6375404530744336
+efficientnet_b0,8Carcinoma,f1,0.48518111964873767
+efficientnet_b0,9Various causes of gallbladder wall thickening,f1,0.5100182149362478
+efficientnet_b0,1Gallstones,support,199.0
+efficientnet_b0,2Abdomen and retroperitoneum,support,175.0
+efficientnet_b0,3cholecystitis,support,172.0
+efficientnet_b0,4Membranous and gangrenous cholecystitis,support,184.0
+efficientnet_b0,5Perforation,support,159.0
+efficientnet_b0,6Polyps and cholesterol crystals,support,153.0
+efficientnet_b0,7Adenomyomatosis,support,413.0
+efficientnet_b0,8Carcinoma,support,239.0
+efficientnet_b0,9Various causes of gallbladder wall thickening,support,387.0
+efficientnet_b1,1Gallstones,precision,1.0
+efficientnet_b1,2Abdomen and retroperitoneum,precision,1.0
+efficientnet_b1,3cholecystitis,precision,1.0
+efficientnet_b1,4Membranous and gangrenous cholecystitis,precision,1.0
+efficientnet_b1,5Perforation,precision,0.9754601226993865
+efficientnet_b1,6Polyps and cholesterol crystals,precision,1.0
+efficientnet_b1,7Adenomyomatosis,precision,0.9948979591836735
+efficientnet_b1,8Carcinoma,precision,0.3375886524822695
+efficientnet_b1,9Various causes of gallbladder wall thickening,precision,0.9928057553956835
+efficientnet_b1,1Gallstones,recall,0.9949748743718593
+efficientnet_b1,2Abdomen and retroperitoneum,recall,1.0
+efficientnet_b1,3cholecystitis,recall,0.9767441860465116
+efficientnet_b1,4Membranous and gangrenous cholecystitis,recall,1.0
+efficientnet_b1,5Perforation,recall,1.0
+efficientnet_b1,6Polyps and cholesterol crystals,recall,1.0
+efficientnet_b1,7Adenomyomatosis,recall,0.4721549636803874
+efficientnet_b1,8Carcinoma,recall,0.99581589958159
+efficientnet_b1,9Various causes of gallbladder wall thickening,recall,0.35658914728682173
+efficientnet_b1,1Gallstones,f1,0.9974811083123426
+efficientnet_b1,2Abdomen and retroperitoneum,f1,1.0
+efficientnet_b1,3cholecystitis,f1,0.9882352941176471
+efficientnet_b1,4Membranous and gangrenous cholecystitis,f1,1.0
+efficientnet_b1,5Perforation,f1,0.9875776397515528
+efficientnet_b1,6Polyps and cholesterol crystals,f1,1.0
+efficientnet_b1,7Adenomyomatosis,f1,0.6403940886699507
+efficientnet_b1,8Carcinoma,f1,0.5042372881355932
+efficientnet_b1,9Various causes of gallbladder wall thickening,f1,0.5247148288973384
+efficientnet_b1,1Gallstones,support,199.0
+efficientnet_b1,2Abdomen and retroperitoneum,support,175.0
+efficientnet_b1,3cholecystitis,support,172.0
+efficientnet_b1,4Membranous and gangrenous cholecystitis,support,184.0
+efficientnet_b1,5Perforation,support,159.0
+efficientnet_b1,6Polyps and cholesterol crystals,support,153.0
+efficientnet_b1,7Adenomyomatosis,support,413.0
+efficientnet_b1,8Carcinoma,support,239.0
+efficientnet_b1,9Various causes of gallbladder wall thickening,support,387.0
+densenet121,1Gallstones,precision,1.0
+densenet121,2Abdomen and retroperitoneum,precision,1.0
+densenet121,3cholecystitis,precision,1.0
+densenet121,4Membranous and gangrenous cholecystitis,precision,1.0
+densenet121,5Perforation,precision,0.99375
+densenet121,6Polyps and cholesterol crystals,precision,1.0
+densenet121,7Adenomyomatosis,precision,0.9045454545454545
+densenet121,8Carcinoma,precision,0.3343195266272189
+densenet121,9Various causes of gallbladder wall thickening,precision,0.971830985915493
+densenet121,1Gallstones,recall,1.0
+densenet121,2Abdomen and retroperitoneum,recall,1.0
+densenet121,3cholecystitis,recall,1.0
+densenet121,4Membranous and gangrenous cholecystitis,recall,1.0
+densenet121,5Perforation,recall,1.0
+densenet121,6Polyps and cholesterol crystals,recall,1.0
+densenet121,7Adenomyomatosis,recall,0.48184019370460046
+densenet121,8Carcinoma,recall,0.9456066945606695
+densenet121,9Various causes of gallbladder wall thickening,recall,0.35658914728682173
+densenet121,1Gallstones,f1,1.0
+densenet121,2Abdomen and retroperitoneum,f1,1.0
+densenet121,3cholecystitis,f1,1.0
+densenet121,4Membranous and gangrenous cholecystitis,f1,1.0
+densenet121,5Perforation,f1,0.9968652037617555
+densenet121,6Polyps and cholesterol crystals,f1,1.0
+densenet121,7Adenomyomatosis,f1,0.6287519747235387
+densenet121,8Carcinoma,f1,0.49398907103825135
+densenet121,9Various causes of gallbladder wall thickening,f1,0.5217391304347826
+densenet121,1Gallstones,support,199.0
+densenet121,2Abdomen and retroperitoneum,support,175.0
+densenet121,3cholecystitis,support,172.0
+densenet121,4Membranous and gangrenous cholecystitis,support,184.0
+densenet121,5Perforation,support,159.0
+densenet121,6Polyps and cholesterol crystals,support,153.0
+densenet121,7Adenomyomatosis,support,413.0
+densenet121,8Carcinoma,support,239.0
+densenet121,9Various causes of gallbladder wall thickening,support,387.0
+densenet169,1Gallstones,precision,0.9802955665024631
+densenet169,2Abdomen and retroperitoneum,precision,1.0
+densenet169,3cholecystitis,precision,0.9772727272727273
+densenet169,4Membranous and gangrenous cholecystitis,precision,1.0
+densenet169,5Perforation,precision,1.0
+densenet169,6Polyps and cholesterol crystals,precision,1.0
+densenet169,7Adenomyomatosis,precision,0.9796954314720813
+densenet169,8Carcinoma,precision,0.3262518968133536
+densenet169,9Various causes of gallbladder wall thickening,precision,0.8114285714285714
+densenet169,1Gallstones,recall,1.0
+densenet169,2Abdomen and retroperitoneum,recall,1.0
+densenet169,3cholecystitis,recall,1.0
+densenet169,4Membranous and gangrenous cholecystitis,recall,1.0
+densenet169,5Perforation,recall,1.0
+densenet169,6Polyps and cholesterol crystals,recall,1.0
+densenet169,7Adenomyomatosis,recall,0.46731234866828086
+densenet169,8Carcinoma,recall,0.899581589958159
+densenet169,9Various causes of gallbladder wall thickening,recall,0.3669250645994832
+densenet169,1Gallstones,f1,0.9900497512437811
+densenet169,2Abdomen and retroperitoneum,f1,1.0
+densenet169,3cholecystitis,f1,0.9885057471264368
+densenet169,4Membranous and gangrenous cholecystitis,f1,1.0
+densenet169,5Perforation,f1,1.0
+densenet169,6Polyps and cholesterol crystals,f1,1.0
+densenet169,7Adenomyomatosis,f1,0.6327868852459017
+densenet169,8Carcinoma,f1,0.47884187082405344
+densenet169,9Various causes of gallbladder wall thickening,f1,0.505338078291815
+densenet169,1Gallstones,support,199.0
+densenet169,2Abdomen and retroperitoneum,support,175.0
+densenet169,3cholecystitis,support,172.0
+densenet169,4Membranous and gangrenous cholecystitis,support,184.0
+densenet169,5Perforation,support,159.0
+densenet169,6Polyps and cholesterol crystals,support,153.0
+densenet169,7Adenomyomatosis,support,413.0
+densenet169,8Carcinoma,support,239.0
+densenet169,9Various causes of gallbladder wall thickening,support,387.0
+resnet18,1Gallstones,precision,1.0
+resnet18,2Abdomen and retroperitoneum,precision,1.0
+resnet18,3cholecystitis,precision,1.0
+resnet18,4Membranous and gangrenous cholecystitis,precision,1.0
+resnet18,5Perforation,precision,1.0
+resnet18,6Polyps and cholesterol crystals,precision,1.0
+resnet18,7Adenomyomatosis,precision,0.9849246231155779
+resnet18,8Carcinoma,precision,0.32791728212703103
+resnet18,9Various causes of gallbladder wall thickening,precision,0.8650306748466258
+resnet18,1Gallstones,recall,1.0
+resnet18,2Abdomen and retroperitoneum,recall,1.0
+resnet18,3cholecystitis,recall,1.0
+resnet18,4Membranous and gangrenous cholecystitis,recall,1.0
+resnet18,5Perforation,recall,1.0
+resnet18,6Polyps and cholesterol crystals,recall,1.0
+resnet18,7Adenomyomatosis,recall,0.4745762711864407
+resnet18,8Carcinoma,recall,0.9288702928870293
+resnet18,9Various causes of gallbladder wall thickening,recall,0.3643410852713178
+resnet18,1Gallstones,f1,1.0
+resnet18,2Abdomen and retroperitoneum,f1,1.0
+resnet18,3cholecystitis,f1,1.0
+resnet18,4Membranous and gangrenous cholecystitis,f1,1.0
+resnet18,5Perforation,f1,1.0
+resnet18,6Polyps and cholesterol crystals,f1,1.0
+resnet18,7Adenomyomatosis,f1,0.6405228758169934
+resnet18,8Carcinoma,f1,0.4847161572052402
+resnet18,9Various causes of gallbladder wall thickening,f1,0.5127272727272727
+resnet18,1Gallstones,support,199.0
+resnet18,2Abdomen and retroperitoneum,support,175.0
+resnet18,3cholecystitis,support,172.0
+resnet18,4Membranous and gangrenous cholecystitis,support,184.0
+resnet18,5Perforation,support,159.0
+resnet18,6Polyps and cholesterol crystals,support,153.0
+resnet18,7Adenomyomatosis,support,413.0
+resnet18,8Carcinoma,support,239.0
+resnet18,9Various causes of gallbladder wall thickening,support,387.0
+resnet34,1Gallstones,precision,0.9850746268656716
+resnet34,2Abdomen and retroperitoneum,precision,1.0
+resnet34,3cholecystitis,precision,0.9709302325581395
+resnet34,4Membranous and gangrenous cholecystitis,precision,1.0
+resnet34,5Perforation,precision,0.9814814814814815
+resnet34,6Polyps and cholesterol crystals,precision,1.0
+resnet34,7Adenomyomatosis,precision,0.9740932642487047
+resnet34,8Carcinoma,precision,0.33523537803138376
+resnet34,9Various causes of gallbladder wall thickening,precision,0.9785714285714285
+resnet34,1Gallstones,recall,0.9949748743718593
+resnet34,2Abdomen and retroperitoneum,recall,1.0
+resnet34,3cholecystitis,recall,0.9709302325581395
+resnet34,4Membranous and gangrenous cholecystitis,recall,1.0
+resnet34,5Perforation,recall,1.0
+resnet34,6Polyps and cholesterol crystals,recall,1.0
+resnet34,7Adenomyomatosis,recall,0.4552058111380145
+resnet34,8Carcinoma,recall,0.9832635983263598
+resnet34,9Various causes of gallbladder wall thickening,recall,0.35400516795865633
+resnet34,1Gallstones,f1,0.99
+resnet34,2Abdomen and retroperitoneum,f1,1.0
+resnet34,3cholecystitis,f1,0.9709302325581395
+resnet34,4Membranous and gangrenous cholecystitis,f1,1.0
+resnet34,5Perforation,f1,0.9906542056074766
+resnet34,6Polyps and cholesterol crystals,f1,1.0
+resnet34,7Adenomyomatosis,f1,0.6204620462046204
+resnet34,8Carcinoma,f1,0.5
+resnet34,9Various causes of gallbladder wall thickening,f1,0.5199240986717267
+resnet34,1Gallstones,support,199.0
+resnet34,2Abdomen and retroperitoneum,support,175.0
+resnet34,3cholecystitis,support,172.0
+resnet34,4Membranous and gangrenous cholecystitis,support,184.0
+resnet34,5Perforation,support,159.0
+resnet34,6Polyps and cholesterol crystals,support,153.0
+resnet34,7Adenomyomatosis,support,413.0
+resnet34,8Carcinoma,support,239.0
+resnet34,9Various causes of gallbladder wall thickening,support,387.0
+squeezenet1_1,1Gallstones,precision,1.0
+squeezenet1_1,2Abdomen and retroperitoneum,precision,1.0
+squeezenet1_1,3cholecystitis,precision,1.0
+squeezenet1_1,4Membranous and gangrenous cholecystitis,precision,1.0
+squeezenet1_1,5Perforation,precision,1.0
+squeezenet1_1,6Polyps and cholesterol crystals,precision,1.0
+squeezenet1_1,7Adenomyomatosis,precision,0.8565400843881856
+squeezenet1_1,8Carcinoma,precision,0.31738437001594894
+squeezenet1_1,9Various causes of gallbladder wall thickening,precision,0.8295454545454546
+squeezenet1_1,1Gallstones,recall,0.9949748743718593
+squeezenet1_1,2Abdomen and retroperitoneum,recall,1.0
+squeezenet1_1,3cholecystitis,recall,1.0
+squeezenet1_1,4Membranous and gangrenous cholecystitis,recall,1.0
+squeezenet1_1,5Perforation,recall,1.0
+squeezenet1_1,6Polyps and cholesterol crystals,recall,1.0
+squeezenet1_1,7Adenomyomatosis,recall,0.4915254237288136
+squeezenet1_1,8Carcinoma,recall,0.8326359832635983
+squeezenet1_1,9Various causes of gallbladder wall thickening,recall,0.3772609819121447
+squeezenet1_1,1Gallstones,f1,0.9974811083123426
+squeezenet1_1,2Abdomen and retroperitoneum,f1,1.0
+squeezenet1_1,3cholecystitis,f1,1.0
+squeezenet1_1,4Membranous and gangrenous cholecystitis,f1,1.0
+squeezenet1_1,5Perforation,f1,1.0
+squeezenet1_1,6Polyps and cholesterol crystals,f1,1.0
+squeezenet1_1,7Adenomyomatosis,f1,0.6246153846153846
+squeezenet1_1,8Carcinoma,f1,0.45958429561200925
+squeezenet1_1,9Various causes of gallbladder wall thickening,f1,0.5186500888099467
+squeezenet1_1,1Gallstones,support,199.0
+squeezenet1_1,2Abdomen and retroperitoneum,support,175.0
+squeezenet1_1,3cholecystitis,support,172.0
+squeezenet1_1,4Membranous and gangrenous cholecystitis,support,184.0
+squeezenet1_1,5Perforation,support,159.0
+squeezenet1_1,6Polyps and cholesterol crystals,support,153.0
+squeezenet1_1,7Adenomyomatosis,support,413.0
+squeezenet1_1,8Carcinoma,support,239.0
+squeezenet1_1,9Various causes of gallbladder wall thickening,support,387.0
+shufflenet_v2_x1_0,1Gallstones,precision,1.0
+shufflenet_v2_x1_0,2Abdomen and retroperitoneum,precision,1.0
+shufflenet_v2_x1_0,3cholecystitis,precision,1.0
+shufflenet_v2_x1_0,4Membranous and gangrenous cholecystitis,precision,1.0
+shufflenet_v2_x1_0,5Perforation,precision,1.0
+shufflenet_v2_x1_0,6Polyps and cholesterol crystals,precision,1.0
+shufflenet_v2_x1_0,7Adenomyomatosis,precision,0.9798994974874372
+shufflenet_v2_x1_0,8Carcinoma,precision,0.3313521545319465
+shufflenet_v2_x1_0,9Various causes of gallbladder wall thickening,precision,0.8682634730538922
+shufflenet_v2_x1_0,1Gallstones,recall,1.0
+shufflenet_v2_x1_0,2Abdomen and retroperitoneum,recall,1.0
+shufflenet_v2_x1_0,3cholecystitis,recall,1.0
+shufflenet_v2_x1_0,4Membranous and gangrenous cholecystitis,recall,1.0
+shufflenet_v2_x1_0,5Perforation,recall,1.0
+shufflenet_v2_x1_0,6Polyps and cholesterol crystals,recall,1.0
+shufflenet_v2_x1_0,7Adenomyomatosis,recall,0.4721549636803874
+shufflenet_v2_x1_0,8Carcinoma,recall,0.9330543933054394
+shufflenet_v2_x1_0,9Various causes of gallbladder wall thickening,recall,0.37467700258397935
+shufflenet_v2_x1_0,1Gallstones,f1,1.0
+shufflenet_v2_x1_0,2Abdomen and retroperitoneum,f1,1.0
+shufflenet_v2_x1_0,3cholecystitis,f1,1.0
+shufflenet_v2_x1_0,4Membranous and gangrenous cholecystitis,f1,1.0
+shufflenet_v2_x1_0,5Perforation,f1,1.0
+shufflenet_v2_x1_0,6Polyps and cholesterol crystals,f1,1.0
+shufflenet_v2_x1_0,7Adenomyomatosis,f1,0.6372549019607843
+shufflenet_v2_x1_0,8Carcinoma,f1,0.48903508771929827
+shufflenet_v2_x1_0,9Various causes of gallbladder wall thickening,f1,0.5234657039711191
+shufflenet_v2_x1_0,1Gallstones,support,199.0
+shufflenet_v2_x1_0,2Abdomen and retroperitoneum,support,175.0
+shufflenet_v2_x1_0,3cholecystitis,support,172.0
+shufflenet_v2_x1_0,4Membranous and gangrenous cholecystitis,support,184.0
+shufflenet_v2_x1_0,5Perforation,support,159.0
+shufflenet_v2_x1_0,6Polyps and cholesterol crystals,support,153.0
+shufflenet_v2_x1_0,7Adenomyomatosis,support,413.0
+shufflenet_v2_x1_0,8Carcinoma,support,239.0
+shufflenet_v2_x1_0,9Various causes of gallbladder wall thickening,support,387.0

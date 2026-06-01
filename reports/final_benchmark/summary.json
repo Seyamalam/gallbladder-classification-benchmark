@@ -1,0 +1,32 @@
+{
+  "models": [
+    "mobilenet_v3_small",
+    "mobilenet_v3_large",
+    "efficientnet_b0",
+    "efficientnet_b1",
+    "densenet121",
+    "densenet169",
+    "resnet18",
+    "resnet34",
+    "squeezenet1_1",
+    "shufflenet_v2_x1_0"
+  ],
+  "selected_runs": {
+    "mobilenet_v3_small": "20260601_004804",
+    "mobilenet_v3_large": "20260601_004804",
+    "efficientnet_b0": "20260601_004804",
+    "efficientnet_b1": "20260601_004804",
+    "densenet121": "20260601_114302",
+    "densenet169": "20260601_114302",
+    "resnet18": "20260601_114302",
+    "resnet34": "20260601_114302",
+    "squeezenet1_1": "20260601_114302",
+    "shufflenet_v2_x1_0": "20260601_114302"
+  },
+  "best_macro_f1_model": "shufflenet_v2_x1_0",
+  "best_macro_f1": 0.8499728548501335,
+  "fastest_inference_model": "mobilenet_v3_small",
+  "fastest_inference_images_per_second": 4627.18064461303,
+  "smallest_model": "squeezenet1_1",
+  "smallest_model_parameters": 727113
+}
