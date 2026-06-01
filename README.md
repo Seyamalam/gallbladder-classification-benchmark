@@ -153,6 +153,86 @@ DenseNet models perform well by ROC-AUC and average precision, but they are the 
 
 ![Benchmark normalized heatmap](reports/final_benchmark/benchmark_normalized_heatmap.png)
 
+## Additional Comparison Tables
+
+The final report also includes decision-oriented tables derived from the completed benchmark outputs.
+
+| category | model | metric |
+| --- | --- | --- |
+| Best macro F1 | `shufflenet_v2_x1_0` | `0.8500` |
+| Best accuracy | `efficientnet_b1` | `0.7727` |
+| Best ROC-AUC | `densenet121` | `0.9609` |
+| Best average precision | `densenet121` | `0.8585` |
+| Fastest inference | `mobilenet_v3_small` | `4627.18` images/sec |
+| Lowest latency | `mobilenet_v3_small` | `0.2161` ms/image |
+| Smallest model | `squeezenet1_1` | `727,113` parameters |
+| Fastest training | `squeezenet1_1` | `10.6` min |
+| Best balanced deployment score | `shufflenet_v2_x1_0` | `0.9004` |
+
+The aggregate rank table combines accuracy, speed, latency, size, training cost, balanced score, and ROC-AUC. Lower average rank is better.
+
+| model | average_rank | note |
+| --- | --- | --- |
+| `shufflenet_v2_x1_0` | `2.71` | Best overall rank |
+| `mobilenet_v3_small` | `3.29` | Fastest and strong accuracy |
+| `squeezenet1_1` | `3.29` | Smallest and fastest training |
+| `efficientnet_b0` | `5.14` | Strong accuracy, moderate cost |
+| `resnet18` | `5.71` | Good accuracy, larger model |
+
+![Average rank comparison](reports/final_benchmark/average_rank_comparison.png)
+
+## Pareto Frontier
+
+The Pareto analysis marks a model as non-dominated if no other model is simultaneously better or equal in macro F1, inference throughput, parameter count, and training time, with at least one strict improvement. Three models sit on the frontier:
+
+- `mobilenet_v3_small`: fastest inference with strong accuracy
+- `squeezenet1_1`: smallest and fastest to train
+- `shufflenet_v2_x1_0`: best accuracy/efficiency balance
+
+![Pareto frontier](reports/final_benchmark/pareto_frontier_accuracy_params.png)
+
+## Derived Efficiency Scores
+
+The report computes extra no-retraining efficiency ratios:
+
+- `macro_f1_per_million_params`
+- `macro_f1_per_training_minute`
+- `macro_f1_per_ms_latency`
+- `throughput_per_million_params`
+- `balanced_deployment_score`
+
+The balanced score uses normalized macro F1, inference speed, model size, and training speed. Under that combined score, `shufflenet_v2_x1_0` ranks first, followed by `mobilenet_v3_small` and `squeezenet1_1`.
+
+![Radar model profiles](reports/final_benchmark/radar_model_profiles.png)
+
+## Generalization, Convergence, and Stability
+
+The generalization gap compares final training metrics against final validation metrics. Smaller gaps suggest less overfitting. `shufflenet_v2_x1_0` had the smallest final macro-F1 gap, while `mobilenet_v3_large` had the largest among these runs.
+
+The convergence table records the best validation epoch, the first epoch reaching 95% of final validation macro F1, final-vs-best degradation, and late-epoch metric variability. Most models reached 95% of their final validation macro F1 very early, which suggests that later epochs mostly refined already-learned decision boundaries.
+
+![Generalization gap](reports/final_benchmark/generalization_gap_comparison.png)
+
+![Convergence stability](reports/final_benchmark/convergence_stability_comparison.png)
+
+## Metric Relationships
+
+The metric correlation heatmap checks whether larger and slower models actually improved score. In this benchmark, the relationship is not simple: larger models were not automatically better, and the strongest deployment candidates came from smaller architectures.
+
+![Metric correlation heatmap](reports/final_benchmark/metric_correlation_heatmap.png)
+
+## Model Family Comparison
+
+Family-level averages are included for MobileNet, EfficientNet, DenseNet, ResNet, SqueezeNet, and ShuffleNet. Since some families have one model and others have two, this is a descriptive comparison, not a statistical claim.
+
+![Model family comparison](reports/final_benchmark/model_family_comparison.png)
+
+## Confusion Analysis
+
+The final report aggregates the most common true-class to predicted-class mistakes across models. This is helpful because two models can have similar macro F1 but different clinical error profiles.
+
+![Top confusion pairs](reports/final_benchmark/top_confusion_pairs.png)
+
 ## Per-Class Behavior
 
 The per-class heatmaps show that the models are broadly similar, but not identical, in their error profile. These plots are useful when picking a model for a class-sensitive workflow, because the highest overall macro F1 model is not always the best model for every individual class.
@@ -162,6 +242,20 @@ The per-class heatmaps show that the models are broadly similar, but not identic
 ![Per-class recall heatmap](reports/final_benchmark/per_class_recall_heatmap.png)
 
 ![Per-class F1 heatmap](reports/final_benchmark/per_class_f1_heatmap.png)
+
+## Learning Rate Schedule
+
+All models start with the same learning rate: `3e-4`. The learning rate values printed in the terminal differ by epoch because the training script uses `torch.optim.lr_scheduler.CosineAnnealingLR`.
+
+The schedule follows a cosine decay over 50 epochs:
+
+```text
+lr(epoch) moves smoothly from 3e-4 toward 0 across the run
+```
+
+This is why the log shows values like `0.00029970`, `0.00029882`, and eventually `0.0`. It is not giving each model a different initial learning rate. Each model receives the same schedule, restarted from the beginning for that model.
+
+Cosine annealing is useful here because the first epochs can make larger updates while pretrained features adapt to the gallbladder dataset, and later epochs use smaller updates to refine the decision boundary without bouncing around as much. A single fixed learning rate is simpler, but it forces one compromise value for the entire run: high enough for early progress, or low enough for late stability. Cosine annealing gives both phases in one schedule.
 
 ## Discussion
 
@@ -221,6 +315,26 @@ Important files:
 - `accuracy_train_time_latency.png`
 - `benchmark_rank_heatmap.png`
 - `benchmark_normalized_heatmap.png`
+- `decision_table.csv`
+- `efficiency_scores.csv`
+- `rank_aggregation.csv`
+- `average_rank_comparison.png`
+- `pareto_frontier.csv`
+- `pareto_frontier_accuracy_params.png`
+- `radar_model_profiles.png`
+- `generalization_gap.csv`
+- `generalization_gap_comparison.png`
+- `convergence_stability.csv`
+- `convergence_stability_comparison.png`
+- `metric_correlation.csv`
+- `metric_correlation_heatmap.png`
+- `model_family_comparison.csv`
+- `model_family_comparison.png`
+- `confusion_pairs_by_model.csv`
+- `confusion_pairs_overall.csv`
+- `top_confusion_pairs.png`
+- `per_class_best_models.csv`
+- `model_report_cards.csv`
 - `per_class_metrics_long.csv`
 - `per_class_precision_heatmap.png`
 - `per_class_recall_heatmap.png`

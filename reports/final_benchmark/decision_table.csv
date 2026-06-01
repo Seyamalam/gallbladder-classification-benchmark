@@ -1,0 +1,10 @@
+category,model,metric,value
+Best macro F1,shufflenet_v2_x1_0,macro_f1,0.8499728548501335
+Best accuracy,efficientnet_b1,accuracy,0.7727054300816915
+Best ROC-AUC,densenet121,macro_roc_auc_ovr,0.9609454458895164
+Best average precision,densenet121,macro_average_precision,0.8585334118589399
+Fastest inference,mobilenet_v3_small,inference_images_per_second,4627.18064461303
+Lowest latency,mobilenet_v3_small,inference_latency_ms_per_image_mean,0.21611432031818367
+Smallest model,squeezenet1_1,total_params,727113.0
+Fastest training,squeezenet1_1,train_seconds,637.5197178340004
+Best balanced deployment score,shufflenet_v2_x1_0,balanced_deployment_score,0.9003824182062928

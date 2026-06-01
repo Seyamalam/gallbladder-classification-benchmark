@@ -1,0 +1,11 @@
+model,accuracy_grade,speed_grade,size_grade,training_cost_grade,overall_grade,recommendation
+mobilenet_v3_small,C,A,A,A,B,Fast deployment
+mobilenet_v3_large,E,D,A,A,D,Baseline/secondary option
+efficientnet_b0,B,E,A,C,B,Accuracy focused
+efficientnet_b1,A,E,B,D,C,Accuracy focused
+densenet121,A,E,B,E,C,Accuracy focused
+densenet169,D,E,C,E,E,Baseline/secondary option
+resnet18,A,D,C,A,B,Accuracy focused
+resnet34,D,E,E,B,D,Baseline/secondary option
+squeezenet1_1,D,B,A,A,B,Baseline/secondary option
+shufflenet_v2_x1_0,A,B,A,A,A,Best balanced

@@ -1,0 +1,17 @@
+true_class,predicted_class,count
+9Various causes of gallbladder wall thickening,8Carcinoma,2404
+7Adenomyomatosis,8Carcinoma,2110
+8Carcinoma,9Various causes of gallbladder wall thickening,115
+8Carcinoma,7Adenomyomatosis,70
+9Various causes of gallbladder wall thickening,7Adenomyomatosis,57
+7Adenomyomatosis,9Various causes of gallbladder wall thickening,48
+3cholecystitis,5Perforation,12
+7Adenomyomatosis,3cholecystitis,7
+7Adenomyomatosis,1Gallstones,3
+9Various causes of gallbladder wall thickening,1Gallstones,3
+1Gallstones,8Carcinoma,2
+9Various causes of gallbladder wall thickening,3cholecystitis,2
+1Gallstones,7Adenomyomatosis,1
+3cholecystitis,1Gallstones,1
+3cholecystitis,9Various causes of gallbladder wall thickening,1
+7Adenomyomatosis,5Perforation,1

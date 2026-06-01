@@ -1,0 +1,73 @@
+model,true_class,predicted_class,count
+mobilenet_v3_small,3cholecystitis,5Perforation,1
+mobilenet_v3_small,7Adenomyomatosis,8Carcinoma,213
+mobilenet_v3_small,7Adenomyomatosis,9Various causes of gallbladder wall thickening,2
+mobilenet_v3_small,8Carcinoma,7Adenomyomatosis,14
+mobilenet_v3_small,8Carcinoma,9Various causes of gallbladder wall thickening,9
+mobilenet_v3_small,9Various causes of gallbladder wall thickening,7Adenomyomatosis,9
+mobilenet_v3_small,9Various causes of gallbladder wall thickening,8Carcinoma,240
+mobilenet_v3_large,3cholecystitis,5Perforation,4
+mobilenet_v3_large,7Adenomyomatosis,8Carcinoma,212
+mobilenet_v3_large,7Adenomyomatosis,9Various causes of gallbladder wall thickening,4
+mobilenet_v3_large,8Carcinoma,7Adenomyomatosis,17
+mobilenet_v3_large,8Carcinoma,9Various causes of gallbladder wall thickening,12
+mobilenet_v3_large,9Various causes of gallbladder wall thickening,7Adenomyomatosis,8
+mobilenet_v3_large,9Various causes of gallbladder wall thickening,8Carcinoma,240
+efficientnet_b0,7Adenomyomatosis,8Carcinoma,209
+efficientnet_b0,7Adenomyomatosis,9Various causes of gallbladder wall thickening,7
+efficientnet_b0,8Carcinoma,7Adenomyomatosis,3
+efficientnet_b0,8Carcinoma,9Various causes of gallbladder wall thickening,15
+efficientnet_b0,9Various causes of gallbladder wall thickening,7Adenomyomatosis,5
+efficientnet_b0,9Various causes of gallbladder wall thickening,8Carcinoma,242
+efficientnet_b1,1Gallstones,7Adenomyomatosis,1
+efficientnet_b1,3cholecystitis,5Perforation,4
+efficientnet_b1,7Adenomyomatosis,8Carcinoma,218
+efficientnet_b1,8Carcinoma,9Various causes of gallbladder wall thickening,1
+efficientnet_b1,9Various causes of gallbladder wall thickening,8Carcinoma,249
+densenet121,7Adenomyomatosis,5Perforation,1
+densenet121,7Adenomyomatosis,8Carcinoma,211
+densenet121,7Adenomyomatosis,9Various causes of gallbladder wall thickening,2
+densenet121,8Carcinoma,7Adenomyomatosis,11
+densenet121,8Carcinoma,9Various causes of gallbladder wall thickening,2
+densenet121,9Various causes of gallbladder wall thickening,7Adenomyomatosis,10
+densenet121,9Various causes of gallbladder wall thickening,8Carcinoma,239
+densenet169,7Adenomyomatosis,1Gallstones,1
+densenet169,7Adenomyomatosis,3cholecystitis,2
+densenet169,7Adenomyomatosis,8Carcinoma,206
+densenet169,7Adenomyomatosis,9Various causes of gallbladder wall thickening,11
+densenet169,8Carcinoma,7Adenomyomatosis,2
+densenet169,8Carcinoma,9Various causes of gallbladder wall thickening,22
+densenet169,9Various causes of gallbladder wall thickening,1Gallstones,3
+densenet169,9Various causes of gallbladder wall thickening,3cholecystitis,2
+densenet169,9Various causes of gallbladder wall thickening,7Adenomyomatosis,2
+densenet169,9Various causes of gallbladder wall thickening,8Carcinoma,238
+resnet18,7Adenomyomatosis,8Carcinoma,211
+resnet18,7Adenomyomatosis,9Various causes of gallbladder wall thickening,6
+resnet18,8Carcinoma,7Adenomyomatosis,1
+resnet18,8Carcinoma,9Various causes of gallbladder wall thickening,16
+resnet18,9Various causes of gallbladder wall thickening,7Adenomyomatosis,2
+resnet18,9Various causes of gallbladder wall thickening,8Carcinoma,244
+resnet34,1Gallstones,8Carcinoma,1
+resnet34,3cholecystitis,1Gallstones,1
+resnet34,3cholecystitis,5Perforation,3
+resnet34,3cholecystitis,9Various causes of gallbladder wall thickening,1
+resnet34,7Adenomyomatosis,1Gallstones,2
+resnet34,7Adenomyomatosis,3cholecystitis,5
+resnet34,7Adenomyomatosis,8Carcinoma,218
+resnet34,8Carcinoma,7Adenomyomatosis,2
+resnet34,8Carcinoma,9Various causes of gallbladder wall thickening,2
+resnet34,9Various causes of gallbladder wall thickening,7Adenomyomatosis,3
+resnet34,9Various causes of gallbladder wall thickening,8Carcinoma,247
+squeezenet1_1,1Gallstones,8Carcinoma,1
+squeezenet1_1,7Adenomyomatosis,8Carcinoma,202
+squeezenet1_1,7Adenomyomatosis,9Various causes of gallbladder wall thickening,8
+squeezenet1_1,8Carcinoma,7Adenomyomatosis,18
+squeezenet1_1,8Carcinoma,9Various causes of gallbladder wall thickening,22
+squeezenet1_1,9Various causes of gallbladder wall thickening,7Adenomyomatosis,16
+squeezenet1_1,9Various causes of gallbladder wall thickening,8Carcinoma,225
+shufflenet_v2_x1_0,7Adenomyomatosis,8Carcinoma,210
+shufflenet_v2_x1_0,7Adenomyomatosis,9Various causes of gallbladder wall thickening,8
+shufflenet_v2_x1_0,8Carcinoma,7Adenomyomatosis,2
+shufflenet_v2_x1_0,8Carcinoma,9Various causes of gallbladder wall thickening,14
+shufflenet_v2_x1_0,9Various causes of gallbladder wall thickening,7Adenomyomatosis,2
+shufflenet_v2_x1_0,9Various causes of gallbladder wall thickening,8Carcinoma,240
